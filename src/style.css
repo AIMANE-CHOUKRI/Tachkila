@@ -1,42 +1,31 @@
-
 .divGrid {
     background-color: darkslateblue;
-    display: grid;
-    padding: 1%;
     width: 62vw;
-    height: 41.5vw;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
-    grid-template-rows: auto auto auto auto auto auto auto auto auto;
-    column-gap: 0.5%;
-    border: white 2px solid;
-    border-radius: 10px;
-    margin: 1%;
-    justify-content: center;
-    align-items: center;
-    row-gap: 1%;
-    /* grid-template-areas:
-        "div1 div2 div3 div4 div5 div6 div7 div8 div9 div10 div11 div12"
-        "div13 div14 div15 div16 div17 div18 div19 div20 div21 div22 div23 div24"
-        "div25 div26 div27 div28 div29 div30 div31 div32 div33 div34 div35 div36"
-        "div37 div38 div39 div40 div41 div42 div43 div44 div45 div46 div47 div48"
-        "div49 div50 div51 div52 div53 div54 div55 div56 div57 div58 div59 div60"
-        "div61 div62 div63 div64 div65 div66 div67 div68 div69 div70 div71 div72"
-        "div73 div74 div75 div76 div77 div78 div79 div80 div81 div82 div83 div84"
-        "div85 div86 div87 div88 div89 div90 div91 div92 div93 div94 div95 div96"
-        "div97 div98 div99 div100 div101 div102 div103 div104 div105 div106 div107 div108"
-    ; */
+    padding: 0.6vw 0.6vw 0 0.6vw;
+    border: 2px solid rgb(187, 128, 229);
 }
-.divKepper {
-    grid-column: ;
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 3.75vw;
+  column-gap: 0.6vw;
+  margin-bottom: 0.6vw;
 }
-.divGrid div {
-    border: 2px white solid;
-    border-radius: 5px;
-    text-align: center;
-    align-items: center;
-    width: 4.7vw;
-    height: 4.05vw;
-    background-color: gray;
-    padding: 6%;
-    
+
+.row div {
+  border: 1px solid rgb(254, 254, 254);
+}
+
+.keeper {
+  grid-column: 1 / 3;
+  height: 12.45vw;
+}
+
+.slot {
+  grid-column-end: span 2;
+}
+
+.start3 {
+  grid-column-start: 3;
 }

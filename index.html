@@ -9,7 +9,7 @@
     <!-- <style type="text/tailwindcss"></style> -->
 </head>
 <body>
-    <header class="flex bg-gradient-to-r from-cyan-950 to-indigo-950 justify-between p-3 items-center ">
+    <header class="flex bg-gradient-to-r from-cyan-950 to-indigo-950 justify-between p-3 items-center w-screen">
         <strong class="flex text-nowrap text-white font-sans items-center">
             <span class="bg-green-600 rounded-full mx-2 p-1">&#9917;</span>
             TACHKILA
@@ -30,115 +30,55 @@
             <button class="bg-green-400 py-3 px-10 my-3 text-white mx-auto rounded-lg text-nowrap">+ Ajouter un joueur</button>
         </aside>
 
-        <main class="bg-gradient-to-b from-indigo-950 to-gray-950 w-screen justify-items-center align-middle">
-            <div class="divGrid">
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div class="divKepper"></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <!-- <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div> -->
+        <main class="bg-gradient-to-b from-indigo-950 to-gray-950 w-full h-screen justify-items-center align-middle">
+                <div class="divGrid  my-3">
+                    <div class="row">
+                        <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                    </div>
+                    <div class="row">
+                        <div></div> <div></div> <div></div>
+                        <div class="slot bg-cyan-600 flex items-center justify-center border-3 font-bold text-lg text-white">DG</div>
+                        <div></div> <div></div>
+                        <div class="slot bg-green-600 flex items-center justify-center border-3 font-bold text-lg text-white">MG</div>
+                        <div></div> <div></div> <div></div>
+                    </div>
+                    <div class="row">
+                        <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                        <div class="slot bg-red-600 flex items-center justify-center border-3 font-bold text-lg text-white">BU</div>
+                    </div>
+                    <div class="row">
+                        <div class="keeper bg-yellow-600 flex items-center justify-center border-3 font-bold text-2xl text-white">GB</div>
+                        <div class="slot bg-cyan-600 flex items-center justify-center border-3 font-bold text-lg text-white">DC</div>
+                        <div></div> <div></div>
+                        <div class="slot bg-green-600 flex items-center justify-center border-3 font-bold text-lg text-white">MC</div>
+                        <div></div> <div></div> <div></div> <div></div>
+                    </div>
+                    <div class="row">
+                        <div class="start3"></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                    </div>
+                    <div class="row">
+                        <div class="slot start3 bg-cyan-600 flex items-center justify-center border-3 font-bold text-lg text-white">DC</div>
+                        <div></div> <div></div>
+                        <div class="slot bg-green-600 flex items-center justify-center border-3 font-bold text-lg text-white">MC</div>
+                        <div></div> <div></div> <div></div> <div></div>
+                    </div>
+                    <div class="row">
+                        <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                        <div class="slot bg-red-600 flex items-center justify-center border-3 font-bold text-lg text-white">BU</div>
+                    </div>
+                    <div class="row">
+                        <div></div> <div></div> <div></div>
+                        <div class="slot bg-cyan-600 flex items-center justify-center border-3 font-bold text-lg text-white">DD</div>
+                        <div></div> <div></div>
+                        <div class="slot bg-green-600 flex items-center justify-center border-3 font-bold text-lg text-white">MD</div>
+                        <div></div> <div></div> <div></div>
+                    </div>
+                    <div class="row">
+                        <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                    </div>
+                </div>
             </div>
-                        
+            
         </main>
     </section>
     
