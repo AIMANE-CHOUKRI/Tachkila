@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const form = document.querySelector('.formAjout');
     const inputNom = document.getElementById('nom');
     const inputNum = document.getElementById('numero');
+    const inputRadio = document.querySelectorAll("input[name='poste']");
     const dialog = document.getElementById('dialogAjout');
 
     if (!form) return;
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         e.preventDefault();
         let nomValid = true;
         let numValid = true;
+        let radioValid = false;
 
         const valueNom = inputNom.value.trim();
         if (valueNom === '' || valueNom.length < 2){
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         } else {
             console.error(inputNom, 'Le nom complet est valid.');
         }
-        console.log(nomValid);
+        console.log("nomValid : ", nomValid);
 
         const valueNum = inputNum.value.trim();
         if (valueNum === '' || valueNum < 1 || valueNum > 99){
@@ -49,6 +51,38 @@ document.addEventListener('DOMContentLoaded', ()=>{
         } else {
             console.error(inputNum, 'Le numéro est valid.');
         }
-        console.log(numValid);
-    })
-})
+        console.log("numValid : ", numValid);
+
+        let checkedRadio = "";
+        // const valueRadio = inputRadio.value.trim();
+        // for (i=0; i<inputRadio.length; i++){
+        //     if(!inputRadio[i].checked){
+        //         radioValid = false;
+        //     } else if (inputRadio[i].checked){
+        //         radioValid = true;
+        //         checkedRadio = inputRadio[i].value;
+        //     }
+        // } 
+        // if (radioValid = false){
+        //     console.error("No radio is checked.");
+        // } else if (radioValid = true){
+        
+        // }
+        // if (!inputRadio){
+        //     radioValid = false;
+        //     console.error("No radio is checked.");
+        // } else {
+        for (i=0; i<inputRadio.length ; i++){
+            if(inputRadio[i].checked){
+                checkedRadio = inputRadio[i].value;
+                radioValid = true;
+            }
+        }
+        if (checkedRadio == ""){
+            radioValid = false;
+            console.error("No radio is checked.");
+        }
+        // }
+        console.error("checkedRadio", checkedRadio);
+        console.log("radioValid : ", radioValid);
+})})
