@@ -105,10 +105,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
             form.reset();
             dialog.hidePopover();
 
-            listeJoueurs.insertAdjacentHTML('afterbegin', `
-                <li class="bg-blue-950 p-4">
+            const joueur = `<li class="bg-blue-950 p-4">
                     <div class="flex justify-between items-center text-white">
-                        <h2 class="bg-cyan-500 p-2 rounded-full">${valueNum}</h2><span><h3>${valueNom}</h3><h4>${checkedRadio}</h4></span><span><button id="btnModifier">&#9999;</button><button id="btnAnnuler">&#128465;</button></span>
+                        <h2 class="bg-cyan-500 p-2 rounded-full">${valueNum}</h2><span><h3>${valueNom}</h3><h4>${checkedRadio}</h4></span><span><button id="btnModifier">&#9999;</button><button id="btnSupprimer">&#128465;</button></span>
                     </div>
                     <select name="poste" id="poste" class="w-full mt-2">
                         <option value="banc">Sur le banc</option>
@@ -124,11 +123,26 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         <option value="bu1">BU - Buteur 1</option>
                         <option value="bu2">BU - Buteur 2</option>
                     </select>
-                </li>`);
+                </li>`;
 
-                joueurs.push(newJoueur);
-                console.table(joueurs);
-                return joueurs;
+            listeJoueurs.insertAdjacentHTML('afterbegin', joueur);
+
+            joueurs.push(newJoueur);
+            console.table(joueurs);
+
+            const btnSupprimer = document.getElementById("btnSupprimer");
+                
+            btnSupprimer.addEventListener("click", (e)=>{
+                const target = e.target; 
+                const pTarget = target.parentNode;
+                const gpTarget = pTarget.parentNode;
+                const gppTarget = gpTarget.parentNode;
+                const gpppTarget = gppTarget.parentNode;
+                gpppTarget.removeChild(gppTarget);
+                e.preventDefault();
+            })
+            
+            return joueurs;
 
         } else {
             console.error("Remplissez toutes les cases avant l'envoi!")
