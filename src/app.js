@@ -38,8 +38,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
             nomValid = false;
             console.error(inputNom, valueNom, 'Le nom complet doit contenir au moins 2 caractères.');
         } else {
-            console.error(inputNom);
+            console.error(inputNom, 'Le nom complet est valid.');
         }
         console.log(nomValid);
+
+        const valueNum = inputNum.value.trim();
+        if (valueNum === '' || valueNum < 1 || valueNum > 99){
+            numValid = false;
+            console.error(inputNum, valueNum, 'Le numéro doit être entre 1 et 99.');
+        } else {
+            console.error(inputNum, 'Le numéro est valid.');
+        }
+        console.log(numValid);
     })
 })
