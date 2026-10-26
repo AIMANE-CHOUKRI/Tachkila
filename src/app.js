@@ -133,12 +133,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
             const btnSupprimer = document.getElementById("btnSupprimer");
                 
             btnSupprimer.addEventListener("click", (e)=>{
+                const index=joueurs.indexOf(newJoueur);
+                joueurs.splice(index,1);
                 const target = e.target; 
                 const pTarget = target.parentNode;
                 const gpTarget = pTarget.parentNode;
-                const gppTarget = gpTarget.parentNode;
-                const gpppTarget = gppTarget.parentNode;
-                gpppTarget.removeChild(gppTarget);
+                const ggpTarget = gpTarget.parentNode;
+                const gggpTarget = ggpTarget.parentNode;
+                gggpTarget.removeChild(ggpTarget);
                 e.preventDefault();
             })
             
