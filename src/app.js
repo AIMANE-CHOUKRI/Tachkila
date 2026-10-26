@@ -19,17 +19,20 @@
 //     console.log(numero);
 // })
 // // console.log(ajouterJoueur())
+const form = document.querySelector('.formAjout');
+const inputNom = document.getElementById('nom');
+const inputNum = document.getElementById('numero');
+const inputRadio = document.querySelectorAll("input[name='poste']");
+const listeJoueurs = document.getElementById('listeJoueurs');
+const dialog = document.getElementById('dialogAjout');
 
-document.addEventListener('DOMContentLoaded', ()=>{
-    const form = document.querySelector('.formAjout');
-    const inputNom = document.getElementById('nom');
-    const inputNum = document.getElementById('numero');
-    const inputRadio = document.querySelectorAll("input[name='poste']");
-    const dialog = document.getElementById('dialogAjout');
+let joueurs = [];
+
+function ajouterJoueur(){}
 
     if (!form) return;
 
-    form .addEventListener('submit', (e)=>{
+    form.addEventListener('submit', (e)=>{
         e.preventDefault();
         let nomValid = true;
         let numValid = true;
@@ -38,18 +41,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const valueNom = inputNom.value.trim();
         if (valueNom === '' || valueNom.length < 2){
             nomValid = false;
-            console.error(inputNom, valueNom, 'Le nom complet doit contenir au moins 2 caractères.');
+            console.error(valueNom, 'Le nom complet doit contenir au moins 2 caractères.');
         } else {
-            console.error(inputNom, 'Le nom complet est valid.');
+            console.error(valueNom, 'Le nom complet est valid.');
         }
         console.log("nomValid : ", nomValid);
 
         const valueNum = inputNum.value.trim();
         if (valueNum === '' || valueNum < 1 || valueNum > 99){
             numValid = false;
-            console.error(inputNum, valueNum, 'Le numéro doit être entre 1 et 99.');
+            console.error(valueNum, 'Le numéro doit être entre 1 et 99.');
         } else {
-            console.error(inputNum, 'Le numéro est valid.');
+            console.error(valueNum, 'Le numéro est valid.');
         }
         console.log("numValid : ", numValid);
 
@@ -72,7 +75,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         //     radioValid = false;
         //     console.error("No radio is checked.");
         // } else {
-        for (i=0; i<inputRadio.length ; i++){
+        for (let i=0; i<inputRadio.length ; i++){
             if(inputRadio[i].checked){
                 checkedRadio = inputRadio[i].value;
                 radioValid = true;
@@ -85,4 +88,43 @@ document.addEventListener('DOMContentLoaded', ()=>{
         // }
         console.error("checkedRadio", checkedRadio);
         console.log("radioValid : ", radioValid);
-})})
+
+        if(nomValid && numValid && radioValid){
+            let newJoueur = [];
+            newJoueur.push(valueNum, valueNom, checkedRadio);
+            // console.table(newJoueur);
+
+            form.reset();
+            dialog.hidePopover();
+
+            listeJoueurs.insertAdjacentHTML('afterbegin', `
+                <li class="bg-blue-950 p-4">
+                    <div class="flex justify-between items-center text-white">
+                        <h2 class="bg-cyan-500 p-2 rounded-full">${valueNum}</h2><span><h3>${valueNom}</h3><h4>${checkedRadio}</h4></span><span><button id="btnModifier">&#9999;</button><button id="btnAnnuler">&#128465;</button></span>
+                    </div>
+                    <select name="poste" id="poste" class="w-full mt-2">
+                        <option value="banc">Sur le banc</option>
+                        <option value="gb">GB - Gardien</option>
+                        <option value="dg">DG - Défenseur gauche</option>
+                        <option value="dc1">DC - Défenseur central 1</option>
+                        <option value="dc2">DC - Défenseur central 2</option>
+                        <option value="dd">DD - Défenseur droit</option>
+                        <option value="mg">MG - Milieu gauche</option>
+                        <option value="mc1">MC - Milieu central 1</option>
+                        <option value="mc2">MC - Milieu central 2</option>
+                        <option value="md">MD - Milieu droit</option>
+                        <option value="bu1">BU - Buteur 1</option>
+                        <option value="bu2">BU - Buteur 2</option>
+                    </select>
+                </li>`);
+
+                joueurs.push(newJoueur);
+                console.table(joueurs);
+                return joueurs;
+
+        } else {
+            console.error("Remplissez toutes les cases avant l'envoi!")
+        }
+
+
+})}) 
