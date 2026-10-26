@@ -30,6 +30,14 @@ let joueurs = [];
 
 function ajouterJoueur(){}
 
+const btnAnnuler = document.getElementById("btnAnnuler");
+btnAnnuler.addEventListener('click', (e)=>{
+    e.preventDefault();
+    dialog.hidePopover();
+    form.reset();
+})
+
+document.addEventListener('DOMContentLoaded', ()=>{
     if (!form) return;
 
     form.addEventListener('submit', (e)=>{
