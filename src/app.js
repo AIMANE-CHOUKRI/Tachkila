@@ -18,12 +18,6 @@ let timerMessage;
 
 let joueurs = JSON.parse(localStorage.getItem('joueurs')) || [];
 
-const btnAnnuler = document.getElementById("btnAnnuler");
-btnAnnuler.addEventListener('click', (e)=>{
-    e.preventDefault();
-    dialog.hidePopover();
-    form.reset();
-})
 function afficherMessage(txt, error = false) {
     clearTimeout(timerMessage);
     message.textContent = txt;
@@ -41,11 +35,13 @@ function reinitialiserFormulaire() {
     if (btnValider) btnValider.textContent = "Ajouter";
 }
 
-    form.addEventListener('submit', (e)=>{
+if (btnAnnuler) {
+    btnAnnuler.addEventListener('click', (e) => {
         e.preventDefault();
-        let nomValid = true;
-        let numValid = true;
-        let radioValid = false;
+        dialog.hidePopover();
+        reinitialiserFormulaire();
+    });
+}
 
         const valueNom = inputNom.value.trim();
         if (valueNom === '' || valueNom.length < 2){
@@ -53,6 +49,23 @@ function reinitialiserFormulaire() {
             console.error(valueNom, 'Le nom complet doit contenir au moins 2 caractères.');
         } else {
             console.error(valueNom, 'Le nom complet est valid.');
+if (btnFermer) {
+    btnFermer.addEventListener('click', () => {
+        dialog.hidePopover();
+        reinitialiserFormulaire();
+    });
+}
+
+if (btnOuvrir) {
+    btnOuvrir.addEventListener('click', () => {
+        reinitialiserFormulaire();
+    });
+}
+
+form.addEventListener('click', (e) => {
+    e.stopPropagation();
+});
+
         }
         console.log("nomValid : ", nomValid);
 
