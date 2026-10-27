@@ -33,6 +33,15 @@ function trouverJoueurParId(id){
     return null;
 }
 
+function numeroDejaPris(numero){
+    for (let i = 0; i < joueurs.length; i++){
+        if (joueurs[i].numero === numero && joueurs[i].id !== idEnModification){
+            return true;
+        }
+    }
+    return false;
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
     if (!form) return;
 
