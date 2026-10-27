@@ -1,34 +1,22 @@
-// // function ajouterJoueur(){
-// //     const form = document.querySelector(".formAjout");
-// //     const nom = form.querySelector("#nom");
-// //     console.log(form);
-// //     console.log(nom);
-// // }
-// const btnSubmit = document.querySelector("button[type='submit']")
-// btnSubmit.addEventListener("submit", function(e){
-//     e.preventDefault();
-//     const form = document.querySelector(".formAjout");
-//     // const nom = form.querySelector("#nom");
-//     // // if (nom.textContent){
-//     //     console.log(nom.textContent);
-//     // }
-//     const nom = form.querySelector("#nom");
-//     const numero = form.querySelector("#numero");
-//     // const nom = form.querySelector("#nom");
-//     console.log(nom);
-//     console.log(numero);
-// })
-// // console.log(ajouterJoueur())
 const form = document.querySelector('.formAjout');
 const inputNom = document.getElementById('nom');
 const inputNum = document.getElementById('numero');
 const inputRadio = document.querySelectorAll("input[name='poste']");
 const listeJoueurs = document.getElementById('listeJoueurs');
 const dialog = document.getElementById('dialogAjout');
+const h1Ajout = document.getElementById('h1Ajout');
+const btnValider = document.getElementById('btnValider');
+const btnOuvrir = document.getElementById('btnOuvrir');
+const btnAnnuler = document.getElementById('btnAnnuler');
+const btnFermer = document.getElementById('btnFermer');
+const nbJoueurs = document.getElementById('nbJoueurs');
+const nbPlaces = document.getElementById('nbPlaces');
+const message = document.getElementById('message');
 
-let joueurs = [];
+let idEnModification = null;
+let timerMessage;
 
-function ajouterJoueur(){}
+let joueurs = JSON.parse(localStorage.getItem('joueurs')) || [];
 
 const btnAnnuler = document.getElementById("btnAnnuler");
 btnAnnuler.addEventListener('click', (e)=>{
@@ -46,8 +34,12 @@ function afficherMessage(txt, error = false) {
     }, 3000);
 }
 
-document.addEventListener('DOMContentLoaded', ()=>{
-    if (!form) return;
+function reinitialiserFormulaire() {
+    form.reset();
+    idEnModification = null;
+    if (h1Ajout) h1Ajout.textContent = "Ajouter un joueur";
+    if (btnValider) btnValider.textContent = "Ajouter";
+}
 
     form.addEventListener('submit', (e)=>{
         e.preventDefault();
