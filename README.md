@@ -4,7 +4,7 @@ Développer une application interactive de composition d'une équipe de football
 ## Technologies
 - HTML5 sémantique (`header`, `main`, `aside`)
 - CSS3 : CSS Grid
-- Tailwind CSS : `header`, `main`, `aside`
+- Tailwind CSS
 - JavaScript (DOM)
 - Git et GitHub (branches, Pull Requests)
 - Atlassian Jira (planification)
@@ -13,3 +13,4 @@ Développer une application interactive de composition d'une équipe de football
 - Site déployé (Vercel) : https://tachkiladeployement-two.vercel.app/
 - Planification des tâches (Jira) : https://aymanechoukri23.atlassian.net/jira/software/projects/TCHKLA/boards/34/backlog?atlOrigin=eyJpIjoiNWRmOWYyNjg2MWQ4NGJjNGFhNzBjNTg5M2Y0OWVhZmYiLCJwIjoiaiJ9
 - Répositoire GitHub : https://github.com/AIMANE-CHOUKRI/Tachkila
+- Présentation Canva : https://canva.link/z3l23u6pvtp9vv2
