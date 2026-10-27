@@ -36,6 +36,15 @@ btnAnnuler.addEventListener('click', (e)=>{
     dialog.hidePopover();
     form.reset();
 })
+function afficherMessage(txt, error = false) {
+    clearTimeout(timerMessage);
+    message.textContent = txt;
+    message.style.backgroundColor = error ? 'red' : 'green';
+    message.classList.remove('hidden');
+    timerMessage = setTimeout(() => {
+        message.classList.add('hidden');
+    }, 3000);
+}
 
 document.addEventListener('DOMContentLoaded', ()=>{
     if (!form) return;
