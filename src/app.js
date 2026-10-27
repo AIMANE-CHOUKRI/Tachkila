@@ -82,6 +82,25 @@ function validerNumero(num) {
     return true;
 }
 
+function postePertesCompatibilite(poste, targetPos) {
+    if (poste === 'gardien' && targetPos === 'gb') return true;
+    if (poste === 'defenseur' && ['dg', 'dc1', 'dc2', 'dd'].includes(targetPos)) return true;
+    if (poste === 'milieu' && ['mg', 'mc1', 'mc2', 'md'].includes(targetPos)) return true;
+    if (poste === 'attaquant' && ['bu1', 'bu2'].includes(targetPos)) return true;
+    return false;
+}
+
+function mettreAJourTerrain() {
+    const slots = document.querySelectorAll('.slot, .keeper');
+    for (let i = 0; i < slots.length; i++) {
+        const posCode = slots[i].getAttribute('data-position');
+        let joueurTrouve = null;
+
+        for (let j = 0; j < joueurs.length; j++) {
+            if (joueurs[j].position === posCode) {
+                joueurTrouve = joueurs[j];
+                break;
+            }
         }
         console.log("nomValid : ", nomValid);
 
@@ -89,10 +108,14 @@ function validerNumero(num) {
         if (valueNum === '' || valueNum < 1 || valueNum > 99){
             numValid = false;
             console.error(valueNum, 'Le numéro doit être entre 1 et 99.');
+        if (joueurTrouve) {
+            slots[i].textContent = joueurTrouve.numero + ' - ' + joueurTrouve.nom;
         } else {
-            console.error(valueNum, 'Le numéro est valid.');
+            slots[i].textContent = posCode.toUpperCase();
         }
-        console.log("numValid : ", numValid);
+    }
+}
+
 
         let checkedRadio = "";
         // const valueRadio = inputRadio.value.trim();
