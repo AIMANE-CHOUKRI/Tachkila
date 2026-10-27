@@ -3,6 +3,7 @@
     width: 62vw;
     padding: 0.6vw 0.6vw 0 0.6vw;
     border: 2px solid rgb(187, 128, 229);
+    container-type: inline-size;
 }
 
 .row {
@@ -15,6 +16,7 @@
 
 .row div {
   border: 1px solid rgb(254, 254, 254);
+  box-sizing: border-box;
 }
 
 .keeper {
@@ -28,4 +30,35 @@
 
 .start3 {
   grid-column-start: 3;
+}
+
+.slot, .keeper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1px !important;
+  line-height: 1 !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+
+.slot-num {
+  font-size: clamp(8px, 1.2cqw, 14px);
+  padding: 1px 4px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.25);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.slot-name {
+  font-size: clamp(7px, 1cqw, 12px);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 95%;
 }
