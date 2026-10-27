@@ -66,6 +66,22 @@ form.addEventListener('click', (e) => {
     e.stopPropagation();
 });
 
+function validerNom(nom) {
+    const regex = /^[a-zA-ZÀ-ÿ\s]{3,30}$/;
+    return regex.test(nom.trim());
+}
+
+function validerNumero(num) {
+    const n = parseInt(num);
+    if (isNaN(n) || n < 1 || n > 99) return false;
+    for (let i = 0; i < joueurs.length; i++) {
+        if (joueurs[i].numero === n && joueurs[i].id !== idEnModification) {
+            return false;
+        }
+    }
+    return true;
+}
+
         }
         console.log("nomValid : ", nomValid);
 
