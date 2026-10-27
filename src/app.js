@@ -227,91 +227,66 @@ function sauvegarder() {
     afficherJoueurs();
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const valueNom = inputNom.value.trim();
+        const valueNum = parseInt(inputNum.value.trim());
         let checkedRadio = "";
-        // const valueRadio = inputRadio.value.trim();
-        // for (i=0; i<inputRadio.length; i++){
-        //     if(!inputRadio[i].checked){
-        //         radioValid = false;
-        //     } else if (inputRadio[i].checked){
-        //         radioValid = true;
-        //         checkedRadio = inputRadio[i].value;
-        //     }
-        // } 
-        // if (radioValid = false){
-        //     console.error("No radio is checked.");
-        // } else if (radioValid = true){
-        
-        // }
-        // if (!inputRadio){
-        //     radioValid = false;
-        //     console.error("No radio is checked.");
-        // } else {
-        for (let i=0; i<inputRadio.length ; i++){
-            if(inputRadio[i].checked){
+
+        for (let i = 0; i < inputRadio.length; i++) {
+            if (inputRadio[i].checked) {
                 checkedRadio = inputRadio[i].value;
-                radioValid = true;
             }
         }
-        if (checkedRadio == ""){
-            radioValid = false;
-            console.error("No radio is checked.");
+
+        if (!validerNom(valueNom)) {
+            afficherMessage("Nom invalide (3-30 lettres).", true);
+            return;
         }
-        // }
-        console.error("checkedRadio", checkedRadio);
-        console.log("radioValid : ", radioValid);
 
-        if(nomValid && numValid && radioValid){
-            let newJoueur = [];
-            newJoueur.push(valueNum, valueNom, checkedRadio);
-            // console.table(newJoueur);
+        if (!validerNumero(valueNum)) {
+            afficherMessage("Numéro invalide ou déjà pris.", true);
+            return;
+        }
 
-            form.reset();
-            dialog.hidePopover();
+        if (!checkedRadio) {
+            afficherMessage("Sélectionnez un poste.", true);
+            return;
+        }
 
-            const joueur = `<li class="bg-blue-950 p-4">
-                    <div class="flex justify-between items-center text-white">
-                        <h2 class="bg-cyan-500 p-2 rounded-full">${valueNum}</h2><span><h3>${valueNom}</h3><h4>${checkedRadio}</h4></span><span><button id="btnModifier">&#9999;</button><button id="btnSupprimer">&#128465;</button></span>
-                    </div>
-                    <select name="poste" id="poste" class="w-full mt-2">
-                        <option value="banc">Sur le banc</option>
-                        <option value="gb">GB - Gardien</option>
-                        <option value="dg">DG - Défenseur gauche</option>
-                        <option value="dc1">DC - Défenseur central 1</option>
-                        <option value="dc2">DC - Défenseur central 2</option>
-                        <option value="dd">DD - Défenseur droit</option>
-                        <option value="mg">MG - Milieu gauche</option>
-                        <option value="mc1">MC - Milieu central 1</option>
-                        <option value="mc2">MC - Milieu central 2</option>
-                        <option value="md">MD - Milieu droit</option>
-                        <option value="bu1">BU - Buteur 1</option>
-                        <option value="bu2">BU - Buteur 2</option>
-                    </select>
-                </li>`;
-
-            listeJoueurs.insertAdjacentHTML('afterbegin', joueur);
-
-            joueurs.push(newJoueur);
-            console.table(joueurs);
-
-            const btnSupprimer = document.getElementById("btnSupprimer");
-                
-            btnSupprimer.addEventListener("click", (e)=>{
-                const index=joueurs.indexOf(newJoueur);
-                joueurs.splice(index,1);
-                const target = e.target; 
-                const pTarget = target.parentNode;
-                const gpTarget = pTarget.parentNode;
-                const ggpTarget = gpTarget.parentNode;
-                const gggpTarget = ggpTarget.parentNode;
-                gggpTarget.removeChild(ggpTarget);
-                e.preventDefault();
-            })
-            
-            return joueurs;
-
+        if (idEnModification !== null) {
+            for (let i = 0; i < joueurs.length; i++) {
+                if (joueurs[i].id === idEnModification) {
+                    joueurs[i].nom = valueNom;
+                    joueurs[i].numero = valueNum;
+                    if (joueurs[i].poste !== checkedRadio) {
+                        joueurs[i].poste = checkedRadio;
+                        joueurs[i].position = 'banc';
+                    }
+                    break;
+                }
+            }
+            afficherMessage("Joueur modifié avec succès");
         } else {
-            console.error("Remplissez toutes les cases avant l'envoi!")
+            const nouveauJoueur = {
+                id: Date.now(),
+                nom: valueNom,
+                numero: valueNum,
+                poste: checkedRadio,
+                position: 'banc'
+            };
+            joueurs.push(nouveauJoueur);
+            afficherMessage("Joueur ajouté avec succès");
         }
 
+        dialog.hidePopover();
+        reinitialiserFormulaire();
+        sauvegarder();
+    });
 
-})}) 
+    afficherJoueurs();
+});
