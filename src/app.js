@@ -43,12 +43,6 @@ if (btnAnnuler) {
     });
 }
 
-        const valueNom = inputNom.value.trim();
-        if (valueNom === '' || valueNom.length < 2){
-            nomValid = false;
-            console.error(valueNom, 'Le nom complet doit contenir au moins 2 caractères.');
-        } else {
-            console.error(valueNom, 'Le nom complet est valid.');
 if (btnFermer) {
     btnFermer.addEventListener('click', () => {
         dialog.hidePopover();
@@ -102,12 +96,7 @@ function mettreAJourTerrain() {
                 break;
             }
         }
-        console.log("nomValid : ", nomValid);
 
-        const valueNum = inputNum.value.trim();
-        if (valueNum === '' || valueNum < 1 || valueNum > 99){
-            numValid = false;
-            console.error(valueNum, 'Le numéro doit être entre 1 et 99.');
         if (joueurTrouve) {
             slots[i].textContent = joueurTrouve.numero + ' - ' + joueurTrouve.nom;
         } else {
