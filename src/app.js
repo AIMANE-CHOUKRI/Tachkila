@@ -14,6 +14,8 @@ const nbJoueurs = document.getElementById('nbJoueurs');
 const nbPlaces = document.getElementById('nbPlaces');
 const message = document.getElementById('message');
 
+let idEnModification = null;
+let timerMessage;
 
 let joueurs = [];
 
@@ -23,6 +25,15 @@ btnAnnuler.addEventListener('click', (e)=>{
     dialog.hidePopover();
     form.reset();
 })
+
+function trouverJouerParPosition(code){
+    for (let i = 0; i < joueurs.length; i++){
+        if(joueurs[i].position === code) {
+            return joueurs[i];
+        }
+    }
+    return null;
+}
 
 function trouverJoueurParId(id){
     for (let i = 0; i < joueurs.length; i++){
