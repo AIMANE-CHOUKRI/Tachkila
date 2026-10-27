@@ -166,6 +166,19 @@ function afficherJoueurs() {
             </select>
         `;
 
+        const btnEdit = li.querySelector('.btnEdit');
+        btnEdit.addEventListener('click', () => {
+            idEnModification = j.id;
+            inputNom.value = j.nom;
+            inputNum.value = j.numero;
+            for (let r = 0; r < inputRadio.length; r++) {
+                inputRadio[r].checked = (inputRadio[r].value === j.poste);
+            }
+            if (h1Ajout) h1Ajout.textContent = "Modifier le joueur";
+            if (btnValider) btnValider.textContent = "Modifier";
+            dialog.showPopover();
+        });
+
         const btnDelete = li.querySelector('.btnDelete');
         btnDelete.addEventListener('click', () => {
             if (confirm("Supprimer ce joueur ?")) {
