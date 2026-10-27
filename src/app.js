@@ -222,6 +222,11 @@ function afficherJoueurs() {
     mettreAJourTerrain();
 }
 
+function sauvegarder() {
+    localStorage.setItem('joueurs', JSON.stringify(joueurs));
+    afficherJoueurs();
+}
+
         let checkedRadio = "";
         // const valueRadio = inputRadio.value.trim();
         // for (i=0; i<inputRadio.length; i++){
