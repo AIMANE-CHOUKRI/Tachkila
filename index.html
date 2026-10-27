@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TACHKILA : préparez la composition de votre équipe de football en schéma 4-4-2.">
     <title>TACHKILA</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="src/app.js" defer></script>
     <link rel="stylesheet" href="src/style.css">
-    <!-- <style type="text/tailwindcss"></style> -->
 </head>
 <body>
-    <header class="flex bg-gradient-to-r from-cyan-950 to-indigo-950 justify-between p-3 items-center ">
+    <header class="flex bg-gradient-to-r from-cyan-950 to-indigo-950 justify-between p-3 items-center w-screen">
         <strong class="flex text-nowrap text-white font-sans items-center">
             <span class="bg-green-600 rounded-full mx-2 p-1">&#9917;</span>
             TACHKILA
         </strong>
 
-        <div class="flex-wrap font-bold">
+        <div class="flex-wrap font-bold hidden sm:flex">
             <span class="mx-2 text-nowrap text-yellow-500">&#9679; GB</span>
             <span class="mx-2 text-nowrap text-blue-500">&#9679; DEF</span>
             <span class="mx-2 text-nowrap text-green-500">&#9679; MIL</span>
@@ -25,122 +26,112 @@
         <b class="text-white font-mono text-nowrap">Schéma <span class="font-mono bg-sky-800 p-2 rounded-lg text-nowrap">4-4-2</span></b> 
     </header>
 
-    <section class="flex">
-        <aside class="flex flex-col md:w-80 bg-gradient-to-b from-cyan-700 to-indigo-900 md:h-screen sm:w-full">
-            <button class="bg-green-400 py-3 px-10 my-3 text-white mx-auto rounded-lg text-nowrap">+ Ajouter un joueur</button>
+    <div id="message" class="hidden fixed top-5 right-5 p-3 rounded-lg text-white font-bold z-50"></div>
+
+    <section class="flex flex-col md:flex-row w-screen">
+        <aside class="flex flex-col lg:w-80 bg-gradient-to-b from-cyan-700 to-indigo-900">
+            <button id="btnOuvrir" class="bg-green-400 py-3 px-10 my-3 text-white mx-auto rounded-lg text-nowrap font-bold" popovertarget="dialogAjout">+ Ajouter un joueur</button>
+            <dialog popover id="dialogAjout" class="bg-gradient-to-b from-blue-900 to-blue-600 rounded-lg">
+                <form class="formAjout flex flex-col p-4 px-4 gap-4 w-80 text-white">
+                    <div class="flex justify-between items-center">
+                        <h1 id="h1Ajout" class="font-bold">Ajouter un joueur</h1>
+                        <button type="button" id="btnFermer" class="text-white font-bold">&times;</button>
+                    </div>
+
+                    <label for="nom">Nom complet</label>
+                    <input type="text" id="nom" name="nom" placeholder="Ex. Yassine Bono" class="text-black p-2 rounded-md bg-white">
+                    <span class="text-red-400 text-xs"></span>
+
+                    <label for="poste">Poste</label>
+                    <div class="flex justify-between" id="fieldsetPoste">
+                        <label for="gardien" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-yellow-500 has-[:checked]:text-yellow-300">
+                            <input type="radio" name="poste" value="gardien" id="gardien" class="sr-only">&#9679; Gardien
+                        </label>
+                        <label for="defenseur" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-blue-500 has-[:checked]:text-blue-300">
+                            <input type="radio" name="poste" value="defenseur" id="defenseur" class="sr-only">&#9679; Défenseur
+                        </label>
+                    </div>
+                    <div class="flex justify-between">
+                        <label for="milieu" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-green-500 has-[:checked]:text-green-300">
+                            <input type="radio" name="poste" value="milieu" id="milieu" class="sr-only">&#9679; Milieu
+                        </label>
+                        <label for="attaquant" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-red-500 has-[:checked]:text-red-300">
+                            <input type="radio" name="poste" value="attaquant" id="attaquant" class="sr-only">&#9679; Attaquant
+                        </label>
+                    </div>
+                    <span class="text-red-400 text-xs"></span>
+
+                    <label for="numero">Numéro (1 à 99)</label>
+                    <input type="number" id="numero" name="numero" placeholder="Ex. 7" class="text-black p-2 rounded-md bg-white">
+                    <span class="text-red-400 text-xs"></span>
+
+                    <span class="flex gap-2 justify-end">
+                        <button type="button" class="bg-blue-950 rounded-lg w-20 mb-1 h-10" id="btnAnnuler">Annuler</button>
+                        <button type="submit" class="bg-green-500 rounded-lg w-20 h-10" id="btnValider">Ajouter</button>
+                    </span>
+                </form>                
+            </dialog>
+
+            <span class="flex justify-between items-center text-white p-2">
+                <h2 class="font-bold">Effectif</h2>
+                <div class="p-2 bg-blue-950 rounded-lg"><span id="nbJoueurs">0</span> joueur(s)</div>
+            </span>
+            <span class="flex justify-between items-center text-white px-2 mb-2 text-xs">
+                <span>Joueurs placés :</span>
+                <span class="bg-blue-950 p-1 rounded"><span id="nbPlaces">0</span> / 11</span>
+            </span>
+
+            <ul id="listeJoueurs" class="flex flex-col gap-2 px-3 pb-3 max-h-[70vh] overflow-y-auto"></ul>
         </aside>
 
-        <main class="bg-gradient-to-b from-indigo-950 to-gray-950 w-screen justify-items-center align-middle">
-            <div class="divGrid">
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div class="divKepper"></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
-                <!-- <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div> -->
+        <main class="bg-gradient-to-b from-indigo-950 to-gray-950 w-full h-screen justify-items-center align-middle">
+            <div class="divGrid my-3">
+                <div class="row">
+                    <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                </div>
+                <div class="row">
+                    <div></div> <div></div> <div></div>
+                    <div class="slot bg-cyan-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="dg">DG</div>
+                    <div></div> <div></div>
+                    <div class="slot bg-green-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="mg">MG</div>
+                    <div></div> <div></div> <div></div>
+                </div>
+                <div class="row">
+                    <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                    <div class="slot bg-red-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="bu1">BU</div>
+                </div>
+                <div class="row">
+                    <div class="keeper bg-yellow-600 flex items-center justify-center border-3 font-bold text-2xl text-white" data-position="gb">GB</div>
+                    <div class="slot bg-cyan-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="dc1">DC</div>
+                    <div></div> <div></div>
+                    <div class="slot bg-green-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="mc1">MC</div>
+                    <div></div> <div></div> <div></div> <div></div>
+                </div>
+                <div class="row">
+                    <div class="start3"></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                </div>
+                <div class="row">
+                    <div class="slot start3 bg-cyan-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="dc2">DC</div>
+                    <div></div> <div></div>
+                    <div class="slot bg-green-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="mc2">MC</div>
+                    <div></div> <div></div> <div></div> <div></div>
+                </div>
+                <div class="row">
+                    <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                    <div class="slot bg-red-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="bu2">BU</div>
+                </div>
+                <div class="row">
+                    <div></div> <div></div> <div></div>
+                    <div class="slot bg-cyan-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="dd">DD</div>
+                    <div></div> <div></div>
+                    <div class="slot bg-green-600 flex items-center justify-center border-3 font-bold text-lg text-white" data-position="md">MD</div>
+                    <div></div> <div></div> <div></div>
+                </div>
+                <div class="row">
+                    <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div>
+                </div>
             </div>
-                        
         </main>
     </section>
-    
 </body>
 </html>
