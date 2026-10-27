@@ -1,41 +1,37 @@
-// // function ajouterJoueur(){
-// //     const form = document.querySelector(".formAjout");
-// //     const nom = form.querySelector("#nom");
-// //     console.log(form);
-// //     console.log(nom);
-// // }
-// const btnSubmit = document.querySelector("button[type='submit']")
-// btnSubmit.addEventListener("submit", function(e){
-//     e.preventDefault();
-//     const form = document.querySelector(".formAjout");
-//     // const nom = form.querySelector("#nom");
-//     // // if (nom.textContent){
-//     //     console.log(nom.textContent);
-//     // }
-//     const nom = form.querySelector("#nom");
-//     const numero = form.querySelector("#numero");
-//     // const nom = form.querySelector("#nom");
-//     console.log(nom);
-//     console.log(numero);
-// })
-// // console.log(ajouterJoueur())
 const form = document.querySelector('.formAjout');
 const inputNom = document.getElementById('nom');
 const inputNum = document.getElementById('numero');
 const inputRadio = document.querySelectorAll("input[name='poste']");
+const fieldsetPoste = document.getElementById('fieldsetPoste');
 const listeJoueurs = document.getElementById('listeJoueurs');
 const dialog = document.getElementById('dialogAjout');
+const h2Ajout = document.getElementById('h2Ajout');
+const btnValider = document.getElementById('btnValider');
+const btnOuvrir = document.getElementById('btnOuvrir');
+const btnAnnuler = document.getElementById('btnAnnuler');
+const btnFermer = document.getElementById('btnFermer');
+const nbJoueurs = document.getElementById('nbJoueurs');
+const nbPlaces = document.getElementById('nbPlaces');
+const message = document.getElementById('message');
+
 
 let joueurs = [];
 
-function ajouterJoueur(){}
 
-const btnAnnuler = document.getElementById("btnAnnuler");
 btnAnnuler.addEventListener('click', (e)=>{
     e.preventDefault();
     dialog.hidePopover();
     form.reset();
 })
+
+function trouverJoueurParId(id){
+    for (let i = 0; i < joueurs.length; i++){
+        if (joueurs[i].id === id){
+            return joueurs[i];
+        }
+    }
+    return null;
+}
 
 document.addEventListener('DOMContentLoaded', ()=>{
     if (!form) return;
@@ -65,24 +61,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         console.log("numValid : ", numValid);
 
         let checkedRadio = "";
-        // const valueRadio = inputRadio.value.trim();
-        // for (i=0; i<inputRadio.length; i++){
-        //     if(!inputRadio[i].checked){
-        //         radioValid = false;
-        //     } else if (inputRadio[i].checked){
-        //         radioValid = true;
-        //         checkedRadio = inputRadio[i].value;
-        //     }
-        // } 
-        // if (radioValid = false){
-        //     console.error("No radio is checked.");
-        // } else if (radioValid = true){
-        
-        // }
-        // if (!inputRadio){
-        //     radioValid = false;
-        //     console.error("No radio is checked.");
-        // } else {
         for (let i=0; i<inputRadio.length ; i++){
             if(inputRadio[i].checked){
                 checkedRadio = inputRadio[i].value;
@@ -100,7 +78,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if(nomValid && numValid && radioValid){
             let newJoueur = [];
             newJoueur.push(valueNum, valueNom, checkedRadio);
-            // console.table(newJoueur);
 
             form.reset();
             dialog.hidePopover();
@@ -127,11 +104,22 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
             listeJoueurs.insertAdjacentHTML('afterbegin', joueur);
 
+            // objet
+            const  total = []
+            const  single ={
+                "nom" : valueNom,
+                "post" : checkedRadio,
+                "numero" : valueNum
+            }
+            
             joueurs.push(newJoueur);
             console.table(joueurs);
+            // objet
+
+            total.push(single);
+            console.table(total);
 
             const btnSupprimer = document.getElementById("btnSupprimer");
-                
             btnSupprimer.addEventListener("click", (e)=>{
                 const index=joueurs.indexOf(newJoueur);
                 joueurs.splice(index,1);
