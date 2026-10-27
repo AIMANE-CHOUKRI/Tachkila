@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TACHKILA</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="src/app.js" defer></script>
     <link rel="stylesheet" href="src/style.css">
     <!-- <style type="text/tailwindcss"></style> -->
 </head>
@@ -33,7 +34,7 @@
                     <h1 id="h1Ajout">Ajouter un joueur</h1>
 
                     <label for="nom">Nom complet</label>
-                    <input type="text" id="nom" name="nom" placeholder="Ex. Yassine Bono" required class="text-black p-2 rounded-md">
+                    <input type="text" id="nom" name="nom" placeholder="Ex. Yassine Bono" class="text-black p-2 rounded-md">
 
                     <label for="poste">Poste</label>
                     <div class="flex justify-between">
@@ -52,18 +53,20 @@
                             <input type="radio" name="poste" value="attaquant" id="attaquant" class="sr-only">&#9679; Attaquant
                         </label>
                     </div>
-                    
                     <label for="numero">Numéro (1 à 99)</label>
-                    <input type="number" id="numero" name="numero" min="1" max="99" placeholder="Ex. 7" required class="text-black p-2 rounded-md">
+                    <input type="number" id="numero" name="numero" placeholder="Ex. 7" class="text-black p-2 rounded-md">
 
                     <span class="flex gap-2 justify-end">
-                        <button class="bg-blue-950 rounded-lg w-20 mb-1 h-10" popovertarget="dialogAjout" popovertargetaction="hide">Annuler</button>
+                        <button class="bg-blue-950 rounded-lg w-20 mb-1 h-10" id="btnAnnuler">Annuler</button>
                         <button type="submit" class="bg-green-500 rounded-lg w-20 h-10">Ajouter</button>
                     </span>
                 
                 </form>                
             </dialog>
 
+            <span class="flex justify-between items-center">
+                <h2 class="text-white p-2 font-bold">Effectif</h2><div class="p-2 mx-2 bg-blue-950 text-white rounded-lg"><span id="nbJoueurs">0</span> joueur(s)</div>
+            </span>
             <ul id="listeJoueurs" class="flex flex-col gap-2 px-3 pb-3 max-h-[70vh] overflow-y-auto"></ul>
         </aside>
 
