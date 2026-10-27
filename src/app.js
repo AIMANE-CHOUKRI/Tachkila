@@ -19,6 +19,7 @@ let timerMessage;
 
 let joueurs = [];
 
+const regexNom = /^\p{L}[\p{L} '\-]{2,29}$/u;
 
 btnAnnuler.addEventListener('click', (e)=>{
     e.preventDefault();
@@ -53,6 +54,8 @@ function numeroDejaPris(numero){
     return false;
 }
 
+<<<<<<< Updated upstream
+=======
 function afficherErreur(champ, texte){
     const zoneErreur = champ.nextElementSibling;
     zoneErreur.textContent = texte;
@@ -64,23 +67,28 @@ function afficherErreur(champ, texte){
     }
 }
 
+function validerNom(){
+    const valueNom = inputNom.value.trim();
+
+    if (valueNom === ''){
+        afficherErreur(inputNom, 'Le nom complet est obligatoire.');
+        return false;
+    }
+    if (regexNom.test(valueNom) === false){
+        afficherErreur(inputNom, 'Le nom doit contenir uniquement des lettres, entre 3 et 30 caractères.');
+        return false;
+    }
+    afficherErreur(inputNom, '');
+    return true;
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
     if (!form) return;
 
     form.addEventListener('submit', (e)=>{
         e.preventDefault();
-        let nomValid = true;
         let numValid = true;
         let radioValid = false;
-
-        const valueNom = inputNom.value.trim();
-        if (valueNom === '' || valueNom.length < 2){
-            nomValid = false;
-            console.error(valueNom, 'Le nom complet doit contenir au moins 2 caractères.');
-        } else {
-            console.error(valueNom, 'Le nom complet est valid.');
-        }
-        console.log("nomValid : ", nomValid);
 
         const valueNum = inputNum.value.trim();
         if (valueNum === '' || valueNum < 1 || valueNum > 99){
