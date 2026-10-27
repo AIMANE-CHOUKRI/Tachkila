@@ -15,11 +15,32 @@ const nbPlaces = document.getElementById('nbPlaces');
 const message = document.getElementById('message');
 
 let idEnModification = null;
+<<<<<<< Updated upstream
 let timerMessage;
 
 let joueurs = [];
 
+=======
+
+let timerMessage;
+
+const CLE_STOCKAGE = 'tachkila-joueurs';
+
 const regexNom = /^\p{L}[\p{L} '\-]{2,29}$/u;
+const regexNum = /^([1-9]|[1-9][0-9])$/;
+
+let joueurs = [];
+
+const joueursSauvegardes = localStorage.getItem('tachkila-joueurs');
+if (joueursSauvegardes !== null){
+    joueurs = JSON.parse(joueursSauvegardes);
+}
+
+function sauvegarder(){
+    localStorage.setItem('tachkila-joueurs', JSON.stringify(joueurs));
+    console.table(joueurs);
+}
+>>>>>>> Stashed changes
 
 btnAnnuler.addEventListener('click', (e)=>{
     e.preventDefault();
@@ -82,6 +103,26 @@ function validerNom(){
     return true;
 }
 
+function validerNum(){
+    const valueNum = inputNum.value.trim();
+
+    if (valueNum === ''){
+        afficherErreur(inputNum, 'Le numéro est obligatoire.');
+        return false;
+    }
+    if (regexNum.test(valueNum) === false){
+        afficherErreur(inputNum, 'Le numéro doit être entre 1 et 99.');
+        return false;
+    }
+    if(numeroDejaPris(Number(valueNum)) === true){
+        afficherErreur(inputNum, 'Ce numéro est déjà utilisé par un autre joueur.');
+        return false;
+    }
+    afficherErreur(inputNum, '');
+    return true;
+}
+
+>>>>>>> Stashed changes
 document.addEventListener('DOMContentLoaded', ()=>{
     if (!form) return;
 
@@ -89,15 +130,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         e.preventDefault();
         let numValid = true;
         let radioValid = false;
-
-        const valueNum = inputNum.value.trim();
-        if (valueNum === '' || valueNum < 1 || valueNum > 99){
-            numValid = false;
-            console.error(valueNum, 'Le numéro doit être entre 1 et 99.');
-        } else {
-            console.error(valueNum, 'Le numéro est valid.');
-        }
-        console.log("numValid : ", numValid);
 
         let checkedRadio = "";
         for (let i=0; i<inputRadio.length ; i++){
@@ -169,6 +201,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const gggpTarget = ggpTarget.parentNode;
                 gggpTarget.removeChild(ggpTarget);
                 e.preventDefault();
+<<<<<<< Updated upstream
+=======
+            });
+
+            const btnModifier = document.getElementById("btnModifier");
+            btnModifier.addEventListener("click", (e)=>{
+                const target = e.target;
+
+>>>>>>> Stashed changes
             })
             
             return joueurs;
