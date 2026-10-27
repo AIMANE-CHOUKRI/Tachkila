@@ -53,6 +53,17 @@ function numeroDejaPris(numero){
     return false;
 }
 
+function afficherErreur(champ, texte){
+    const zoneErreur = champ.nextElementSibling;
+    zoneErreur.textContent = texte;
+
+    if (texte === ''){
+        champ.classList.remove('ring-2', 'ring-red-400');
+    } else {
+        champ.classList.add('ring-2', 'ring-red-400');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
     if (!form) return;
 
