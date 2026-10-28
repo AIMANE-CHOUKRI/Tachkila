@@ -43,19 +43,19 @@
                     <span class="text-red-400 text-xs"></span>
 
                     <label for="poste">Poste</label>
-                    <div class="flex justify-between" id="fieldsetPoste">
-                        <label for="gardien" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-yellow-500 has-[:checked]:text-yellow-300">
+                    <div class="flex justify-between">
+                        <label for="gardien" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-yellow-500">
                             <input type="radio" name="poste" value="gardien" id="gardien" class="sr-only">&#9679; Gardien
                         </label>
-                        <label for="defenseur" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-blue-500 has-[:checked]:text-blue-300">
+                        <label for="defenseur" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-blue-500">
                             <input type="radio" name="poste" value="defenseur" id="defenseur" class="sr-only">&#9679; Défenseur
                         </label>
                     </div>
                     <div class="flex justify-between">
-                        <label for="milieu" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-green-500 has-[:checked]:text-green-300">
+                        <label for="milieu" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-green-500">
                             <input type="radio" name="poste" value="milieu" id="milieu" class="sr-only">&#9679; Milieu
                         </label>
-                        <label for="attaquant" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-red-500 has-[:checked]:text-red-300">
+                        <label for="attaquant" class="bg-blue-950 w-[49%] p-3 rounded-lg cursor-pointer has-[:checked]:ring-2 has-[:checked]:ring-red-500">
                             <input type="radio" name="poste" value="attaquant" id="attaquant" class="sr-only">&#9679; Attaquant
                         </label>
                     </div>
@@ -72,15 +72,9 @@
                 </form>                
             </dialog>
 
-            <span class="flex justify-between items-center text-white p-2">
-                <h2 class="font-bold">Effectif</h2>
-                <div class="p-2 bg-blue-950 rounded-lg"><span id="nbJoueurs">0</span> joueur(s)</div>
+            <span class="flex justify-between items-center">
+                <h2 class="text-white p-2 font-bold">Effectif</h2><div class="p-2 mx-2 bg-blue-950 text-white rounded-lg"><span id="nbJoueurs">0</span> joueur(s)</div>
             </span>
-            <span class="flex justify-between items-center text-white px-2 mb-2 text-xs">
-                <span>Joueurs placés :</span>
-                <span class="bg-blue-950 p-1 rounded"><span id="nbPlaces">0</span> / 11</span>
-            </span>
-
             <ul id="listeJoueurs" class="flex flex-col gap-2 px-3 pb-3 max-h-[70vh] overflow-y-auto"></ul>
         </aside>
 
